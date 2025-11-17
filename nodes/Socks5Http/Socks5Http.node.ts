@@ -5,6 +5,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 	IHttpRequestOptions,
+	IHttpRequestMethods,
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
@@ -153,7 +154,7 @@ export class Socks5Http implements INodeType {
 		for (let i = 0; i < items.length; i++) {
 			try {
 				const url = this.getNodeParameter('url', i) as string;
-				const method = this.getNodeParameter('method', i) as string;
+				const method = (this.getNodeParameter('method', i) as IHttpRequestMethods);
 
 				const headersJson = this.getNodeParameter('headersJson', i, '') as string;
 				const sendBody = this.getNodeParameter('sendBody', i, false) as boolean;
@@ -171,7 +172,7 @@ export class Socks5Http implements INodeType {
 					try {
 						headers = JSON.parse(headersJson) as IDataObject;
 					} catch (err) {
-						throw new NodeOperationError(this.getNode(), 'Invalid JSON in Headers field', {
+						throw new NodeOperationError(this.getNode(), 'Invalid JSON in Headers field' + err, {
 							itemIndex: i,
 						});
 					}
@@ -182,7 +183,7 @@ export class Socks5Http implements INodeType {
 					try {
 						body = JSON.parse(bodyJson) as IDataObject;
 					} catch (err) {
-						throw new NodeOperationError(this.getNode(), 'Invalid JSON in Body field', {
+						throw new NodeOperationError(this.getNode(), 'Invalid JSON in Body field' + err, {
 							itemIndex: i,
 						});
 					}
@@ -201,8 +202,8 @@ export class Socks5Http implements INodeType {
 				const socksAgent = new SocksProxyAgent(socksUrl);
 
 				const requestOptions: IHttpRequestOptions & {
-					httpAgent?: any;
-					httpsAgent?: any;
+					httpAgent?: SocksProxyAgent;
+					httpsAgent?: SocksProxyAgent;
 				} = {
 					url,
 					method,
@@ -246,8 +247,14 @@ export class Socks5Http implements INodeType {
 					continue;
 				}
 
-				if ((error as any).context) {
-					(error as any).context.itemIndex = i;
+				type ErrorNode = {
+					context: {
+						itemIndex: number;
+					}
+				}
+
+				if ((error as ErrorNode).context) {
+					(error as ErrorNode).context.itemIndex = i;
 					throw error;
 				}
 
