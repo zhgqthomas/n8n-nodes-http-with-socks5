@@ -31,7 +31,7 @@
 		"strict": false,
 		"credentials": [],
 		"nodes": [
-			"dist/nodes/Socks5Http.node.js"
+			"dist/nodes/Socks5Http/Socks5Http.node.js"
 		]
 	},
 	"devDependencies": {
