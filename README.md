@@ -1,4 +1,4 @@
-# n8n-nodes-http-over-socks5
+# n8n-nodes-http-with-socks5
 
 This is an n8n community node. It lets you use _app/service name_ in your n8n workflows.
 
