@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-http-with-socks5",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "implementation of http node over socks5",
 	"license": "MIT",
 	"keywords": [
