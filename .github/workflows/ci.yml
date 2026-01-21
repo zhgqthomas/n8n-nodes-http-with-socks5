@@ -110,4 +110,4 @@ jobs:
       - name: Publish to npm
         run: npm publish --access public --provenance
         env:
-          RELEASE_MODE: "1"
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
