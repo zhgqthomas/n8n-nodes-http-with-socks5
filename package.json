@@ -11,6 +11,10 @@
 		"name": "Thomas Zhang",
 		"email": "zhgqthomas@outlook.com"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zhgqthomas/n8n-nodes-http-with-socks5"
+	},
 	"scripts": {
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
