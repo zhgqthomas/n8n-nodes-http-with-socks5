@@ -8,7 +8,7 @@
 		"removeComments": true,
 		"useUnknownInCatchVariables": false,
 		"forceConsistentCasingInFileNames": true,
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"strictNullChecks": true,
@@ -19,7 +19,8 @@
 		"declaration": true,
 		"sourceMap": true,
 		"skipLibCheck": true,
-		"outDir": "./dist/"
+		"outDir": "./dist/",
+		"types": ["node"]
 	},
 	"include": ["credentials/**/*", "nodes/**/*", "nodes/**/*.json", "package.json"]
 }
